@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import style from './NavBar.module.css'
 
 export default function NavBar() {
@@ -6,26 +7,26 @@ export default function NavBar() {
     <div >
       <nav className={`navbar navbar-expand-lg navbar-dark ${style.bgColor}` }>
         <div className="container">
-          <a className="navbar-brand" href="#">NOXE</a>
+          <Link className="navbar-brand" to='/home'>NOXE</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <Link className="nav-link active" aria-current="page" to='/home' >Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Movies</a>
+                <Link className="nav-link active" aria-current="page" to="/movies">Movies</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">TvShows</a>
+                <Link className="nav-link active" aria-current="page" to="/tvshows">TvShows</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">People</a>
+                <Link className="nav-link active" aria-current="page" to="people">People</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Network</a>
+                <Link className="nav-link active" aria-current="page" to="network">Network</Link>
               </li>
             </ul>
             <form className="d-flex align-items-center">

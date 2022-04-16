@@ -3,7 +3,7 @@ import Joi from 'joi';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [error, setError] = useState('');
   const [isLoading, setisLoading] = useState('');
   const [errorList, seterrorList] = useState([]);
@@ -47,6 +47,7 @@ export default function SignIn() {
         setisLoading(false);
         console.log(data.token);
         localStorage.setItem('token' , data.token);
+        props.getUserData();
         navigate('/home');
       } else {
         setisLoading(false);

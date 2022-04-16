@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+
 export default function Home() {
 
   let [movies, setMovies] = useState([]);
@@ -27,9 +28,10 @@ export default function Home() {
       <div className='row'>
         {movies.map((movie, index) => {
           return (
-            <div className='col-md-2' id={index}>
-              <p>{movie.title}</p>
-              <img className='w-100' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="image" />
+            <div className='col-md-2 mb-3' id={index}>
+             
+              <img className='w-100' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={`${movie.title}`} />
+              <p >{movie.title}</p>
             </div>
           )
         })}

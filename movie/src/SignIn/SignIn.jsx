@@ -45,6 +45,8 @@ export default function SignIn() {
       let { data } = await axios.post('https://routeegypt.herokuapp.com/signin', user);
       if (data.message === 'success') {
         setisLoading(false);
+        console.log(data.token);
+        localStorage.setItem('token' , data.token);
         navigate('/home');
       } else {
         setisLoading(false);

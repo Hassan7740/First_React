@@ -14,8 +14,7 @@ export default function NavBar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {
-                props.userData ? '' 
-                :<>
+                props.userData ? <>
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to='/home' >Home</Link>
                   </li>
@@ -31,7 +30,7 @@ export default function NavBar(props) {
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="network">Network</Link>
                   </li>
-                </> 
+                </> :''
               }
 
             </ul>
@@ -49,7 +48,7 @@ export default function NavBar(props) {
               </li>
               {
                 props.userData ? 
-                   <a onClick={props.signOut} className="nav-link active">LogOut</a>
+                   <a onClick={props.SignOut} className="nav-link active">LogOut</a>
                   : <>
                   <li className='nav-item'>
                     <Link className="nav-link active" to={"register"} >Register</Link>

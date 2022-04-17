@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useState , useEffect, Children } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import style from './App.module.css';
 import Home from '../Home/Home';
@@ -11,9 +11,20 @@ import Network from '../Network/Network';
 import SignIn from './../SignIn/SignIn';
 import jwtDecode from 'jwt-decode';
 
+
 export default function App() {
 
   let  [userData, setUserData] = useState(null);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    
+  if(localStorage.getItem('token')){
+    getUserData();
+  }
+
+  }, [])
+  
 
   function getUserData() {
     const data = jwtDecode(localStorage.getItem('token'));
@@ -24,6 +35,16 @@ export default function App() {
   function SignOut (){
     localStorage.removeItem('token');
     setUserData(null);
+    navigate('signin');
+  }
+
+  function ProtectedRoute ({children}){
+    if(localStorage.getItem('token') == null){
+     return <Navigate to='/Signin'/>;
+    }
+    else {
+      return children;
+    }
   }
 
   return (
@@ -31,14 +52,14 @@ export default function App() {
       <NavBar SignOut={SignOut} userData={userData} />
       <div className="container">
         <Routes>
-          <Route path='' element={<Home />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/tvshows' element={<TvShows />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/people' element={<People />} />
-          <Route path='/network' element={<Network />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<Home/>} />
+          <Route path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>} />
+          <Route path='/movies' element={<ProtectedRoute><Movies/></ProtectedRoute>} />
+          <Route path='/tvshows' element={<ProtectedRoute><TvShows/></ProtectedRoute>} />
+          <Route path='/register' element={<ProtectedRoute><Register/></ProtectedRoute>} />
+          <Route path='/people' element={<ProtectedRoute><People/></ProtectedRoute>} />
+          <Route path='/network' element={<ProtectedRoute><Network/></ProtectedRoute>} />
+          <Route path='/register' element={<Register/>} />
           <Route path='/signin' element={<SignIn getUserData={getUserData} />} />
         </Routes>
       </div>
